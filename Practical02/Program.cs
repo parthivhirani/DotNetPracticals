@@ -19,6 +19,7 @@ namespace Practical02
             // calling printInfo() method to print customer details
             customer1.printInfo();
             customer2.printInfo();
+            customer3.printInfo();
         }
     }
 }

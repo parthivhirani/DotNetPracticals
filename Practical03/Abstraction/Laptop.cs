@@ -21,7 +21,7 @@ namespace Practical03.Abstraction
         }
 
         // defining MotherBoardInfo() method
-        public void MotherBoardInfo()
+        private void MotherBoardInfo()
         {
             Console.WriteLine("Mother Board Information");
         }

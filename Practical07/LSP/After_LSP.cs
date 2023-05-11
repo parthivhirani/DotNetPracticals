@@ -1,50 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Practical07.LSP;
 
 namespace Practical07.LSP
 {
-    // creating IBankEmployee interface which has getEmployee() method
-    public interface IBankEmployee
+    public class Driver
     {
-        public void getEmployee() { }
-    }
-    class Driver
-    {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            // creating instance of Cashier class and giving its reference to the interface
-            IBankEmployee employee = new Cashier();
-            employee.getEmployee();
+            // creating instance of KYC class and calling methods depends on the condition
+            KYC customer = new KYC();
+            if (customer.isKYCDone)
+            {
+                customer.getKYCDetails();
+            }
+            else
+            {
+                customer.getCustomerDetails();
+            }
         }
     }
 
-    // implementing method of interface in the Manager class
-    class Manager : IBankEmployee
+    // KYC class is derived from the Customer class and overriding both the methods of Customer class
+    public class KYC : Customer
     {
-        public void getEmployee()
+        public override void getKYCDetails()
         {
-            Console.WriteLine("Name: ABC\nType: Technical\nPosition: Branch Manager\nExperience: 7 years");
+            Console.WriteLine("Name: XYZ\nAccountNo: 123456789\nAge: 21\nContactNo: 9999999999" +
+                "\nKYC Date: 21/01/2023\nPAN: 98798FG89");
         }
-    }
-
-    // implementing method of interface in the Cashier class
-    class Cashier : IBankEmployee
-    {
-        public void getEmployee()
+        public override void getCustomerDetails()
         {
-            Console.WriteLine("Name: XYZ\nType: Technical\nPosition: Cashier\nExperience: 2 years");
-        }
-    }
-
-    // implementing method of interface in the Peon class
-    class Peon : IBankEmployee
-    {
-        public void getEmployee()
-        {
-            Console.WriteLine("Name: MNO\nType: Non-Technical\nPosition: Peon\nExperience: 1 years");
+            Console.WriteLine("Name: XYZ\nAccountNo: 123456789\nAge: 21\nContactNo: 9999999999");
         }
     }
 }

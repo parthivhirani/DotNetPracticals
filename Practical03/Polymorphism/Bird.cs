@@ -10,7 +10,7 @@ namespace Practical03.Polymorphism
     public class Bird
     {
         // Voice() method of Bird class which prints bird's voice
-        public void Voice()
+        public virtual void Voice()
         {
             Console.WriteLine("Turr Turr");
         }

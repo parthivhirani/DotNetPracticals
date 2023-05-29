@@ -23,7 +23,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         {5675, new Customer() { AccountNo = 34324, FirstName = "Jay", LastName = "G", Balance = 48567 } },
         {7867, new Customer() { AccountNo = 12325, FirstName = "Abhay", LastName = "C" , Balance = 78217} },
         {6787, new Customer() { AccountNo = 343459, FirstName = "Jil", LastName = "P" , Balance = 32600} },
-        {7897, new Customer() { AccountNo = 56689, FirstName = "Jay", LastName = "K" , Balance = 42930} }
+        {7897, new Customer() { AccountNo = 56689, FirstName = "Kinjal", LastName = "S" , Balance = 42930} }
     };
 
     public override int pinEntry()
@@ -51,7 +51,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nPlease enter valid PIN");
+                    Console.WriteLine("\nInvalid PIN!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
@@ -91,7 +91,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You had entered invalid choice!");
+                    Console.WriteLine("You have entered invalid choice!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }

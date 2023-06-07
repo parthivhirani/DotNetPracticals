@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
+// sealed class which implements all methods of ATM and contains data of user.
 sealed class ATMImplementation: AbsATM, IATMProcessing
 {
     int pinNo;
@@ -17,6 +18,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
     double withdrawAmt = 0;
     double creditAmt = 0;
 
+    // user bank details
     static Dictionary<int, Customer> userList = new Dictionary<int, Customer>()
     {
         {1234, new Customer() { AccountNo = 123456, FirstName = "Parthiv", LastName = "H", Balance = 36259 } },
@@ -26,6 +28,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         {7897, new Customer() { AccountNo = 566890, FirstName = "Kinjal", LastName = "S" , Balance = 42930} }
     };
 
+    // PIN entry method which takes input from the user and authenticate the user.
     public override int pinEntry()
     {
         Console.WriteLine("entering ATM Card....");
@@ -64,6 +67,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         return pinNo;
     }
 
+    // availableServices() method prints all the services of ATM machine.
     public override void availableServices()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -77,6 +81,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         Console.ForegroundColor = ConsoleColor.White;
     }
 
+    // takeChoice() method which takes choice from user according to available services.
     public static void takeChoice()
     {
         while (true)
@@ -103,6 +108,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         }
     }
 
+    // atmProcess() method which processes ATM services as per the user inputs.
     public void atmProcess(int pinNo)
     {
         try

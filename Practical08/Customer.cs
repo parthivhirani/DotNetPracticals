@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Practical08
 {
+    // Customer model class which has properties of Customer.
     class Customer
     {
         public int AccountNo { get; set; }

@@ -19,16 +19,15 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
 
     static Dictionary<int, Customer> userList = new Dictionary<int, Customer>()
     {
-        {1234, new Customer() { AccountNo = 12345, FirstName = "Parthiv", LastName = "H", Balance = 36259 } },
-        {5675, new Customer() { AccountNo = 34324, FirstName = "Jay", LastName = "G", Balance = 48567 } },
-        {7867, new Customer() { AccountNo = 12325, FirstName = "Abhay", LastName = "C" , Balance = 78217} },
+        {1234, new Customer() { AccountNo = 123456, FirstName = "Parthiv", LastName = "H", Balance = 36259 } },
+        {5675, new Customer() { AccountNo = 343243, FirstName = "Jay", LastName = "G", Balance = 48567 } },
+        {7867, new Customer() { AccountNo = 123259, FirstName = "Abhay", LastName = "C" , Balance = 78217} },
         {6787, new Customer() { AccountNo = 343459, FirstName = "Jil", LastName = "P" , Balance = 32600} },
-        {7897, new Customer() { AccountNo = 56689, FirstName = "Kinjal", LastName = "S" , Balance = 42930} }
+        {7897, new Customer() { AccountNo = 566890, FirstName = "Kinjal", LastName = "S" , Balance = 42930} }
     };
 
     public override int pinEntry()
     {
-
         Console.WriteLine("entering ATM Card....");
         Thread.Sleep(1500);
         Console.WriteLine("verifying card no...");
@@ -80,9 +79,9 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
 
     public static void takeChoice()
     {
-        try
+        while (true)
         {
-            while (true)
+            try
             {
                 Console.Write("Enter your choice: ");
                 choice = Convert.ToInt32(Console.ReadLine());
@@ -95,17 +94,18 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
-        }
-        catch
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Improper input found!");
-            Console.ForegroundColor = ConsoleColor.White;
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Improper input found!");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
     }
 
     public void atmProcess(int pinNo)
     {
+        try
         {
             switch (choice)
             {
@@ -118,6 +118,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                     Thread.Sleep(500);
                     Console.WriteLine($"\nYour bank balance is {userList[pinNo].Balance}");
                     break;
+
                 case 2:
                     Console.Write("Enter debit amount: ");
                     withdrawAmt = Convert.ToInt32(Console.ReadLine());
@@ -147,33 +148,24 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                 case 3:
                     Console.Write("Enter credit amount: ");
                     creditAmt = Convert.ToInt32(Console.ReadLine());
-                    if (creditAmt < 50000)
-                    {
-                        userList[pinNo].Balance += creditAmt;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Amount credited successfully.");
-                        Console.ForegroundColor = ConsoleColor.White;
-
-                        Console.Write("fetching balance..");
-                        Thread.Sleep(500);
-                        Console.Write(".");
-                        Thread.Sleep(500);
-                        Console.Write(".");
-                        Thread.Sleep(500);
-
-                        Console.WriteLine($"\nYour current balance is: {userList[pinNo].Balance}");
-                        break;
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Please enter amount less than 50,000");
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                    break;
                     
+                    userList[pinNo].Balance += creditAmt;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Amount credited successfully.");
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    Console.Write("fetching balance..");
+                    Thread.Sleep(500);
+                    Console.Write(".");
+                    Thread.Sleep(500);
+                    Console.Write(".");
+                    Thread.Sleep(500);
+
+                    Console.WriteLine($"\nYour current balance is: {userList[pinNo].Balance}");
+                    break;
+
                 case 4:
-                    while(true)
+                    while (true)
                     {
                         Console.Write("Enter old PIN: ");
                         oldPIN = Convert.ToInt32(Console.ReadLine());
@@ -210,5 +202,15 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                     break;
             }
         }
+        catch
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Improper input found!");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Thank You. Visit Again!");
+        Console.ForegroundColor = ConsoleColor.White;
     }
 }

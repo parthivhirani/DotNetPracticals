@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\parthiv\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\Practical08.csproj",
+      "projectUniqueName": "C:\\Users\\parthiv\\OneDrive - Simform Solutions Pvt. Ltd\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\Practical08.csproj",
       "projectName": "Practical08",
-      "projectPath": "C:\\Users\\parthiv\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\Practical08.csproj",
+      "projectPath": "C:\\Users\\parthiv\\OneDrive - Simform Solutions Pvt. Ltd\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\Practical08.csproj",
       "packagesPath": "C:\\Users\\parthiv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\parthiv\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\obj\\",
+      "outputPath": "C:\\Users\\parthiv\\OneDrive - Simform Solutions Pvt. Ltd\\Documents\\Parthiv\\ASP .NET\\ASP .NET Practicals\\Practical08\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\parthiv\\AppData\\Roaming\\NuGet\\NuGet.Config",

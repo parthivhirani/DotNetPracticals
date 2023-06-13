@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
     double creditAmt = 0;
 
     // user bank details
+    // Generic Dictionary to store user details
     static Dictionary<int, Customer> userList = new Dictionary<int, Customer>()
     {
         {1234, new Customer() { AccountNo = 123456, FirstName = "Parthiv", LastName = "H", Balance = 36259 } },
@@ -27,9 +29,9 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         {6787, new Customer() { AccountNo = 343459, FirstName = "Jil", LastName = "P" , Balance = 32600} },
         {7897, new Customer() { AccountNo = 566890, FirstName = "Kinjal", LastName = "S" , Balance = 42930} }
     };
-
+    // --------------------------------------------------------------------------------------------
     // PIN entry method which takes input from the user and authenticate the user.
-    public override int pinEntry()
+    protected internal override int pinEntry()
     {
         Console.WriteLine("entering ATM Card....");
         Thread.Sleep(1500);
@@ -53,22 +55,23 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nInvalid PIN!");
+                    Console.WriteLine("\nPlease enter valid PIN!");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
             catch
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nPlease enter valid input");
+                Console.WriteLine("Please enter valid input.");
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
         return pinNo;
     }
 
-    // availableServices() method prints all the services of ATM machine.
-    public override void availableServices()
+    // --------------------------------------------------------------------------------------------
+    // availableServices() method for customer that prints all the services of ATM machine.
+    protected internal override void availableServices(int pin)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("\n------------------------");
@@ -81,6 +84,29 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
         Console.ForegroundColor = ConsoleColor.White;
     }
 
+    // --------------------------------------------------------------------------------------------
+    // availableServices() method for admin that prints all the services of admin.
+    protected internal override void availableServices(string pin)
+    {
+        try
+        {
+            if (pin.ToLower() == "admin")
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n------------------------");
+                Console.WriteLine($"---This is Admin Login---");
+                Console.WriteLine("You can handle all customers from here");
+                Console.WriteLine("------------------------");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
+        catch(CustomEx ce)
+        {
+            Console.WriteLine(ce.Message);
+        }
+    }
+
+    // --------------------------------------------------------------------------------------------
     // takeChoice() method which takes choice from user according to available services.
     public static void takeChoice()
     {
@@ -94,20 +120,17 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                     break;
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You have entered invalid choice!");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    throw new CustomEx("You have entered invalid choice!");
                 }
             }
-            catch
+            catch(CustomEx ce)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Improper input found!");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(ce.Message);
             }
         }
     }
 
+    // --------------------------------------------------------------------------------------------
     // atmProcess() method which processes ATM services as per the user inputs.
     public void atmProcess(int pinNo)
     {
@@ -193,9 +216,7 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                             }
                             else
                             {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("PIN doesn't matched.");
-                                Console.ForegroundColor = ConsoleColor.White;
+                                throw new CustomEx("PIN doesn't match");
                             }
                         }
                         else
@@ -208,13 +229,11 @@ sealed class ATMImplementation: AbsATM, IATMProcessing
                     break;
             }
         }
-        catch
+        catch(CustomEx ce)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Improper input found!");
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(ce.Message);
         }
-        
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Thank You. Visit Again!");
         Console.ForegroundColor = ConsoleColor.White;

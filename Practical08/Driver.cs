@@ -13,8 +13,8 @@ namespace Practical08
         static void Main(string[] args)
         {
             ATMImplementation atm = new();
-            int pin = atm.pinEntry();
-            atm.availableServices();
+            var pin = atm.pinEntry();
+            atm.availableServices(pin);
             ATMImplementation.takeChoice();
             atm.atmProcess(pin);
         }
